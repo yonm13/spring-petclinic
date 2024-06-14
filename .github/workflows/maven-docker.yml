@@ -43,5 +43,5 @@ jobs:
         env:
           JF_ENV_1: ${{ secrets.JF_SECRET_ENV_1 }}
       - name: Push image to artifactory docker repo
-        run: jfrog rt docker-push sprint-petclinic:lastest test-docker
+        run: jfrog rt docker-push docker.io/library/spring-petclinic:latest test-docker
         
