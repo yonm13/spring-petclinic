@@ -33,4 +33,15 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven Wrapper
-        run: ./mvnw spring-boot:build-image
+        run: |
+              ./mvnw spring-boot:build-image
+              docker images
+      - name: Set up JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        with:
+          version: 'latest'
+        env:
+          JF_ENV_1: ${{ secrets.JF_SECRET_ENV_1 }}
+      - name: Push image to artifactory docker repo
+        run: jfrog docker-push sprint-petclinic:lastest test-docker
+        
